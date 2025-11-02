@@ -1,0 +1,41 @@
+<div class="container">
+  <h2 class="mb-4">User Management</h2>
+  <button class="btn btn-primary mb-3" (click)="addUser()">+ Add User</button>
+
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Status</th>
+        <th>Department</th>
+        <th>Designation</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.firstName }} {{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>{{ user.status }}</td>
+        <td>{{ user.department }}</td>
+        <td>{{ user.designation }}</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-warning me-2" (click)="editUser(user)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteUser(user)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  @if(showDialog){
+  <app-user-dialog-component [user]="selectedUser" (save)="saveUser($event)" (close)="closeDialog()">
+  </app-user-dialog-component>
+  }
+
+</div>

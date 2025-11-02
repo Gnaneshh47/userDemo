@@ -22,6 +22,7 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ]
           },
@@ -38,13 +39,35 @@
                   "maximumWarning": "4kB",
                   "maximumError": "8kB"
                 }
-              ],
+              ],"define": {
+                "API_URL": "'http://localhost:7194/'"
+              },
+              "outputHashing": "all"
+            },"t4sting": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],"define": {
+                "API_URL": "'http://localhost:7194/'"
+              },
               "outputHashing": "all"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "define": {
+                "API_URL": "'http://localhost:7193/'",
+                "database": "'usersdb'"
+              }
             }
           },
           "defaultConfiguration": "production"

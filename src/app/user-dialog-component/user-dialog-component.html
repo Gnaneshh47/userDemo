@@ -1,0 +1,115 @@
+<div class="modal fade show d-block" role="dialog" style="z-index: 1050;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">{{ user ? 'Edit User' : 'Add User' }}</h5>
+                <button type="button" class="btn-close btn-close-white" (click)="close.emit()"></button>
+            </div>
+
+            <form #userForm="ngForm" (ngSubmit)="onSave(userForm)">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <!-- First Name -->
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="firstName" class="form-control" [(ngModel)]="tempUser.firstName"
+                                required />
+                            <div *ngIf="userForm.submitted && !tempUser.firstName" class="text-danger small">
+                                First name is required.
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="lastName" class="form-control" [(ngModel)]="tempUser.lastName"
+                                required />
+                            <div *ngIf="userForm.submitted && !tempUser.lastName" class="text-danger small">
+                                Last name is required.
+                            </div>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="col-md-4">
+                            <label class="form-label">Age</label>
+                            <input type="number" name="age" class="form-control" [(ngModel)]="tempUser.age" required
+                                min="18" max="70" />
+                            <div *ngIf="userForm.submitted && (!tempUser.age || tempUser.age < 18)"
+                                class="text-danger small">
+                                Please enter a valid age (18–70).
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-md-4">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" [(ngModel)]="tempUser.email"
+                                required />
+                            <div *ngIf="userForm.submitted && !tempUser.email" class="text-danger small">
+                                Email is required.
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="col-md-4">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" name="phoneNumber" class="form-control" [(ngModel)]="tempUser.phoneNumber"
+                                pattern="^[0-9]{10}$" required />
+                            <div *ngIf="userForm.submitted && !tempUser.phoneNumber" class="text-danger small">
+                                Phone number is required.
+                            </div>
+                            <div *ngIf="isPhoneInvalid" class="text-danger small">
+                                Must be a valid 10-digit number.
+                            </div>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="col-md-6">
+                            <label class="form-label d-block">Status</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="status" value="Active"
+                                    [(ngModel)]="tempUser.status" />
+                                <label class="form-check-label">Active</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="status" value="Inactive"
+                                    [(ngModel)]="tempUser.status" />
+                                <label class="form-check-label">Inactive</label>
+                            </div>
+                        </div>
+
+                        <!-- Department -->
+                        <div class="col-md-6">
+                            <label class="form-label">Department</label>
+                            <select name="department" class="form-select" [(ngModel)]="tempUser.department" required>
+                                <option value="" disabled>Select Department</option>
+                                <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+                            </select>
+                            <div *ngIf="userForm.submitted && !tempUser.department" class="text-danger small">
+                                Department is required.
+                            </div>
+                        </div>
+
+                        <!-- Designation -->
+                        <div class="col-md-6">
+                            <label class="form-label">Designation</label>
+                            <select name="designation" class="form-select" [(ngModel)]="tempUser.designation" required>
+                                <option value="" disabled>Select Designation</option>
+                                <option *ngFor="let des of designations" [value]="des">{{ des }}</option>
+                            </select>
+                            <div *ngIf="userForm.submitted && !tempUser.designation" class="text-danger small">
+                                Designation is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="close.emit()">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
